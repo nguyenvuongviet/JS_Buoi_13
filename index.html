@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập JS Buổi 13</title>
+  </head>
+  <body>
+    <div style="display: flex">
+      <!-- Bài 1: Quản lý tuyển sinh -->
+      <div style="width: 48%">
+        <h2>Bài 1: Quản lý tuyển sinh</h2>
+        <div style="padding-left: 50px; font-size: 18px">
+          <label>Điểm chuẩn: </label>
+          <input
+            type="number"
+            id="diemChuan"
+            step="0.1"
+            style="font-size: 16px"
+          />
+          <br /><br />
+          <label>Điểm thi 1: </label>
+          <input
+            type="number"
+            id="diemThi1"
+            step="0.1"
+            style="font-size: 16px"
+          />
+          <br /><br />
+          <label>Điểm thi 2: </label>
+          <input
+            type="number"
+            id="diemThi2"
+            step="0.1"
+            style="font-size: 16px"
+          />
+          <br /><br />
+          <label>Điểm thi 3: </label>
+          <input
+            type="number"
+            id="diemThi3"
+            step="0.1"
+            style="font-size: 16px"
+          />
+          <br /><br />
+          <label>Khu vực (A, B, C hoặc X nếu không có ưu tiên): </label>
+          <select
+            id="khuVuc"
+            style="width: 50px; margin-left: 15px; font-size: 16px"
+          >
+            <option value="X">X</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+          <br /><br />
+          <label>Đối tượng (1, 2, 3 hoặc 0 nếu không có ưu tiên): </label>
+          <select
+            id="doiTuong"
+            style="width: 50px; margin-left: 15px; font-size: 16px"
+          >
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+          <br /><br />
+          <button
+            onclick="checkResult()"
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              cursor: pointer;
+              border-radius: 10px;
+              background-color: blue;
+              color: #fff;
+              font-size: 17px;
+            "
+          >
+            Kiểm tra
+          </button>
+        </div>
+        <h3 id="ketQuaTuyenSinh"></h3>
+      </div>
+      <hr />
+      <!-- Bài 2: Tính tiền điện -->
+      <div style="width: 48%">
+        <h2>Bài 2: Tính tiền điện</h2>
+        <div style="padding-left: 50px; font-size: 18px">
+          <label>Tên khách hàng: </label>
+          <input type="text" id="tenKH" style="font-size: 16px" />
+          <br /><br />
+          <label>Số kW tiêu thụ: </label>
+          <input type="number" id="soKw" step="0.1" style="font-size: 16px" />
+          <br /><br />
+          <button
+            onclick="electricityBill()"
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              cursor: pointer;
+              border-radius: 10px;
+              background-color: blue;
+              color: #fff;
+              font-size: 17px;
+            "
+          >
+            Tính tiền
+          </button>
+        </div>
+        <h3 id="tienDien"></h3>
+      </div>
+    </div>
+    <hr />
+    <div style="display: flex">
+      <!-- Bài 3: Tính thuế thu nhập cá nhân -->
+      <div style="width: 48%">
+        <h2>Bài 3: Tính thuế thu nhập cá nhân</h2>
+        <div style="padding-left: 50px; font-size: 18px">
+          <label>Họ tên: </label>
+          <input type="text" id="hoTen" style="font-size: 16px" />
+          <br /><br />
+          <label>Tổng thu nhập năm (triệu): </label>
+          <input
+            type="number"
+            id="thuNhap"
+            step="0.1"
+            style="font-size: 16px"
+          />
+          <br /><br />
+          <label>Số người phụ thuộc: </label>
+          <input
+            type="number"
+            id="soNguoiPhuThuoc"
+            style="font-size: 16px"
+            size="3"
+          />
+          <br /><br />
+          <button
+            onclick="incomeTax()"
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              cursor: pointer;
+              border-radius: 10px;
+              background-color: blue;
+              color: #fff;
+              font-size: 17px;
+            "
+          >
+            Tính thuế
+          </button>
+        </div>
+        <h3 id="thueThuNhap"></h3>
+      </div>
+      <hr />
+      <!-- Bài 4: Tính tiền cáp -->
+      <div style="width: 48%">
+        <h2>Bài 4: Tính tiền cáp</h2>
+        <div style="padding-left: 50px; font-size: 18px">
+          <label>Mã khách hàng: </label>
+          <input type="text" id="maKH" style="font-size: 16px" />
+          <br /><br />
+          <label> Loại khách hàng: </label>
+          <select
+            id="loaiKhachHang"
+            style="margin-left: 15px; font-size: 16px; width: fit-content"
+          >
+            <option value="nhaDan">Nhà dân</option>
+            <option value="doanhNghiep">Doanh nghiệp</option>
+          </select>
+          <br />
+          <div id="groupSo" style="display: none">
+            <br />
+            <label>Số kết nối: </label>
+            <input type="number" id="soKetNoi" style="font-size: 16px" />
+          </div>
+          <br />
+          <label>Số kênh cao cấp: </label>
+          <input type="number" id="soKenhCaoCap" style="font-size: 16px" />
+          <br /><br />
+          <button
+            onclick="cableBill()"
+            style="
+              border: 1px solid black;
+              padding: 10px;
+              cursor: pointer;
+              border-radius: 10px;
+              background-color: blue;
+              color: #fff;
+              font-size: 17px;
+            "
+          >
+            Tính tiền
+          </button>
+        </div>
+        <h3 id="tienCap"></h3>
+      </div>
+    </div>
+    <!-- JS -->
+    <script src="./js/quanLyTuyenSinh.js"></script>
+    <script src="./js/tienDien.js"></script>
+    <script src="./js/thueThuNhap.js"></script>
+    <script src="./js/tienCap.js"></script>
+  </body>
+</html>
